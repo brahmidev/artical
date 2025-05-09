@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- CodeMirror Core and Theme -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+
+  <!-- CodeMirror Scripts (HTML, CSS, JS Support) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+
+ 
+
+
+    <link rel="stylesheet" href="style .css">
+</head>
+<body>
+
+
+
+      <main class="content">
+        <div class="art-p">
+          <h1 id="main-title">
+            Build a Simple JavaScript Image Slider From Scratch <br> (No Libraries Required)
+          </h1>
+      
+          <p id="intro-text">
+            Building an image slider from scratch might seem like a task that requires jQuery or a dedicated plugin. However, with just HTML, CSS, and JavaScript, it’s possible to create a clean, functional slider without any external libraries.
+          </p>
+
+          <hr>
+      
+          <h2>Preview the Image Slider</h2>
+      
+          <p>
+            Before diving into the code, here’s a quick preview of the image slider that we will be built in this tutorial.
+          </p>
+        </div>
+
+        <!-- FIRST LIVE DEMO -->
+
+        <!-- CODE EDITOR SECTION -->
+        <section class="editor">
+          <!-- Editor Tabs and Area -->
+    <div class="editor-pane">
+      <div class="editor-tabs">
+        <button data-lang="html" class="tab-btn active">HTML</button>
+        <button data-lang="css" class="tab-btn">CSS</button>
+        <button data-lang="js" class="tab-btn">JavaScript</button>
+      </div>
+      <div class="code">
+        <textarea id="code" name="code"></textarea>
+      </div>
+    </div>
+    
+    <!-- Live Preview -->
+    <div class="preview-pane">
+      <div class="editor-tabs">
+          <button class="toggle" id="toggle">HTML</button>
+        </div>
+      <div class="preview">
+        <iframe id="preview"></iframe>
+      </div>
+    </div>
+
+    </section>
+
+      <div class="art-p">
+        <p>
+          Now, let's begin building the image slider from the ground up. We’ll start with the HTML structure, move on to the CSS for styling, and finish by adding JavaScript to bring the slider to life.
+          </p>
+          <hr>
+          
+          <!-- EXPALINE PART SECTION -->
+
+    
+      <h2>Step 1: The HTML Structure</h2>
+      <p>
+        Let’s begin with the basic structure of our slider. This will give us the foundation to build on.
+      </p>
+            <div class="code-container">
+        <!-- Top Bar -->
+        <div class="code-header">
+          <span class="code-type">HTML</span>
+          <button class="copy-btn" onclick="copyCode()">Copy</button>
+        </div>
+      
+        <!-- Code Section -->
+        <div class="code-section">
+          <pre><code class="language-html" id="html-code-content">
+            <div class="line"><span class="line-number">1</span><span class="line-code">&lt;div class="slider-container"&gt;</span></div>
+            <div class="line"><span class="line-number">2</span><span class="line-code">&lt;div class="slider"&gt;</span></div>
+            <div class="line"><span class="line-number">3</span><span class="line-code">&lt;img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Mountain Landscape" class="slide active" /&gt;</span></div>
+            <div class="line"><span class="line-number">4</span><span class="line-code">&lt;img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Forest Pathway" class="slide" /&gt;</span></div>
+            <div class="line"><span class="line-number">5</span><span class="line-code">&lt;img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Beach Sunset" class="slide" /&gt;</span></div>
+            <div class="line"><span class="line-number">6</span><span class="line-code">&lt;/div&gt;</span></div>
+            <div class="line"><span class="line-number">7</span><span class="line-code">&lt;button class="prev"&gt;&#10094;&lt;/button&gt;</span></div>
+            <div class="line"><span class="line-number">8</span><span class="line-code">&lt;button class="next"&gt;&#10095;&lt;/button&gt;</span></div>
+            <div class="line"><span class="line-number">9</span><span class="line-code">&lt;/div&gt;</span></div>
+            </code></pre>                     
+        </div>
+      </div>
+      
+      <p>
+        This HTML sets up the slider container. Inside it, the <span class="keyword">.slider</span> div holds all the images, each with an <span class="keyword">alt</span> attribute for accessibility. To ensure the first image is visible by default, we add a class <span class="keyword">active</span> to it. Later, we'll use CSS and JavaScript to switch between slides.
+      </p>
+      
+      <p>
+        Below the slider, there are two buttons: one with the class <span class="keyword">prev</span> for going back, and one with the class <span class="keyword">next</span> for moving forward.
+      </p>
+      
+      
+
+      
+
+<h2>Step 2: Styling the Slider with CSS</h2>
+
+<p>
+  Now, let's move on to styling. I’ll break the CSS into sections so it’s easier to understand.
+</p>
+
+<h3>1. Container Layout</h3>
+
+<p>
+  This CSS block styles the main container for our slider, centering it on the page, setting a fixed size, and adding some polished visual effects.
+</p>
+
+
+<div class="code-container">
+  <!-- Top Bar -->
+  <div class="code-header">
+    <span class="code-type">CSS</span>
+    <button class="copy-btn">Copy</button>
+  </div>
+
+  <!-- Code Section -->
+  <div class="code-section">
+    <pre><code class="language-css" id="css-code-content">
+      <div class="line"><span class="line-number">1</span><span class="line-code">.slider-container {</span></div>
+      <div class="line"><span class="line-number">2</span><span class="line-code">  display: flex;</span></div>
+      <div class="line"><span class="line-number">3</span><span class="line-code">  align-items: center;</span></div>
+      <div class="line"><span class="line-number">4</span><span class="line-code">  justify-content: center;</span></div>
+      <div class="line"><span class="line-number">5</span><span class="line-code">  margin: 0 auto;</span></div>
+      <div class="line"><span class="line-number">6</span><span class="line-code">  position: relative;</span></div>
+      <div class="line"><span class="line-number">7</span><span class="line-code">  max-width: 800px;</span></div>
+      <div class="line"><span class="line-number">8</span><span class="line-code">  max-height: 450px; /* Adjusted height */</span></div>
+      <div class="line"><span class="line-number">9</span><span class="line-code">  overflow: hidden;</span></div>
+      <div class="line"><span class="line-number">10</span><span class="line-code">  border-radius: 10px;</span></div>
+      <div class="line"><span class="line-number">11</span><span class="line-code">  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);</span></div>
+      <div class="line"><span class="line-number">12</span><span class="line-code">}</span></div>
+      </code></pre>
+      
+  </div>
+</div>
+
+<p>
+  <span class="keyword">display: flex;</span> <span class="keyword">align-items: center;</span> <span class="keyword">justify-content: center;</span>  These properties center the content both vertically and horizontally inside the container.
+</p>
+<p> <span class="keyword">margin: 0 auto;</span> centers the container horizontally by setting the top and bottom margins to 0 and the left and right margins to auto, perfect for centering block-level elements like divs. </p>
+<p>
+  <span class="keyword">position: relative;</span>  This allows us to position elements (like buttons) absolutely inside the container later on.
+</p>
+<p>
+  <span class="keyword">max-width: 800px;</span> <span class="keyword">max-height: 450px;</span> <span class="keyword">overflow: hidden;</span>  These properties set a fixed size for the slider and ensure that any content extending beyond the container is hidden.
+</p>
+<p>
+  <span class="keyword">border-radius: 10px;</span> <span class="keyword">box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);</span>  Used to give the slider rounded corners and a soft shadow, providing a modern, polished look.
+</p>
+<p>
+  For now, the fixed dimensions help maintain simplicity, but later you can make this more responsive using percentages or media queries.
+</p>
+
+
+
+<h3>2. Slides Visibility</h3>
+
+<p>
+  Now that our slider container is styled and centered, let’s focus on the images inside it. This part of the CSS defines how the slides (images) are arranged and displayed within the <span class="keyword">.slider</span> div. We’ll ensure the slides sit in a row, but only one is visible at a time, just like we planned in the HTML.
+</p>
+
+
+<div class="code-container">
+  <!-- Top Bar -->
+  <div class="code-header">
+    <span class="code-type">CSS</span>
+    <button class="copy-btn" onclick="copyCode()">Copy</button>
+  </div>
+  
+  <!-- Code Section -->
+  <div class="code-section">
+    <pre><code class="language-css" id="css-code-content">
+      <div class="line"><span class="line-number">13</span><span class="line-code">.slider {</span></div>
+      <div class="line"><span class="line-number">14</span><span class="line-code">  display: flex;</span></div>
+      <div class="line"><span class="line-number">15</span><span class="line-code">}</span></div>
+      <div class="line"><span class="line-number">16</span><span class="line-code">.slide {</span></div>
+      <div class="line"><span class="line-number">17</span><span class="line-code">  min-width: 100%;</span></div>
+      <div class="line"><span class="line-number">18</span><span class="line-code">  display: none;</span></div>
+      <div class="line"><span class="line-number">19</span><span class="line-code">}</span></div>
+      <div class="line"><span class="line-number">20</span><span class="line-code">.slide.active {</span></div>
+      <div class="line"><span class="line-number">21</span><span class="line-code">  display: block;</span></div>
+      <div class="line"><span class="line-number">22</span><span class="line-code">}</span></div>
+    </code></pre>
+  </div>
+</div>
+
+
+<p><span class="keyword">.slider { display: flex; }</span>  This lines up all the slides horizontally.</p>
+<p><span class="keyword">.slide { min-width: 100%; display: none; }</span>  Each image (or slide) stretches to fill the full width of the container, but stays hidden by default.</p>
+<p><span class="keyword">.slide.active { display: block; }</span>  Only the active slide the one currently being shown gets displayed. This is the same class we added in the HTML to the first image.</p>
+
+
+
+
+<h3>3. Navigation Buttons</h3>
+
+<p>
+  The final part of our CSS styles the navigation buttons the "previous" and "next" arrows that let users switch between slides. These buttons are positioned inside the <span class="keyword">.slider-container</span>, which we made <span class="keyword">position: relative</span> earlier, so we can place them exactly where we want.
+</p>
+
+
+<div class="code-container">
+  <!-- Top Bar -->
+  <div class="code-header">
+    <span class="code-type">CSS</span>
+    <button class="copy-btn" onclick="copyCode()">Copy</button>
+  </div>
+  
+  <!-- Code Section -->
+  <div class="code-section">
+    <pre><code class="language-css" id="css-code-content">
+      <div class="line"><span class="line-number">23</span><span class="line-code">.prev, .next {</span></div>
+      <div class="line"><span class="line-number">24</span><span class="line-code">  position: absolute;</span></div>
+      <div class="line"><span class="line-number">25</span><span class="line-code">  top: 50%;</span></div>
+      <div class="line"><span class="line-number">26</span><span class="line-code">  transform: translateY(-50%);</span></div>
+      <div class="line"><span class="line-number">27</span><span class="line-code">  background-color: rgba(0, 0, 0, 0.5);</span></div>
+      <div class="line"><span class="line-number">28</span><span class="line-code">  color: #fff;</span></div>
+      <div class="line"><span class="line-number">29</span><span class="line-code">  border: none;</span></div>
+      <div class="line"><span class="line-number">30</span><span class="line-code">  padding: 12px;</span></div>
+      <div class="line"><span class="line-number">31</span><span class="line-code">  font-size: 24px;</span></div>
+      <div class="line"><span class="line-number">32</span><span class="line-code">  border-radius: 50%;</span></div>
+      <div class="line"><span class="line-number">33</span><span class="line-code">  cursor: pointer;</span></div>
+      <div class="line"><span class="line-number">34</span><span class="line-code">  z-index: 2;</span></div>
+      <div class="line"><span class="line-number">35</span><span class="line-code">}</span></div>
+      <div class="line"><span class="line-number">36</span><span class="line-code">.prev:hover, .next:hover {</span></div>
+      <div class="line"><span class="line-number">37</span><span class="line-code">  background-color: rgba(0, 0, 0, 0.8);</span></div>
+      <div class="line"><span class="line-number">38</span><span class="line-code">}</span></div>
+      <div class="line"><span class="line-number">39</span><span class="line-code">.prev {</span></div>
+      <div class="line"><span class="line-number">40</span><span class="line-code">  left: 10px;</span></div>
+      <div class="line"><span class="line-number">41</span><span class="line-code">}</span></div>
+      <div class="line"><span class="line-number">42</span><span class="line-code">.next {</span></div>
+      <div class="line"><span class="line-number">43</span><span class="line-code">  right: 10px;</span></div>
+      <div class="line"><span class="line-number">44</span><span class="line-code">}</span></div>
+    </code></pre>    
+  </div>
+</div>
+
+
+  <p>For the button layout and alignment:
+  <span class="keyword">position: absolute; top: 50%; transform: translateY(-50%);</span>  This places the buttons inside the container and centers them vertically .<br>
+  <span class="keyword">background-color: rgba(0, 0, 0, 0.5);</span>  A semi-transparent black background keeps the buttons visible without covering too much of the image, and <span class="keyword">color: #fff</span> makes the icons stand out.<br>
+  <span class="keyword">border: none; </span><span class="keyword">padding: 10px;</span> <span class="keyword">font-size: 24px;</span><span class="keyword">border-radius: 50%;</span>   Remove default borders, adds padding, and shapes the buttons into circles.<br>
+  <span class="keyword">cursor: pointer;</span><span class="keyword">z-index: 2;</span>  Here we make the buttons clickable and ensure they appear above the images.</p>
+  <p><span class="keyword">.prev:hover, .next:hover { background-color: rgba(0, 0, 0, 0.7); }</span>  On hover, the background gets darker to show it's interactive.</p>
+  <p><span class="keyword">.prev { left: 10px; } and .next { right: 10px; }</span> - These position the "previous" button on the left side and the "next" button on the right.</p>
+  
+
+  <p>With all the styling in place, our slider now looks great but it doesn’t do anything yet. Let’s jump into the JavaScript and make it fully functional by making the slides actually move when we click the navigation buttons.</p>
+
+
+
+<h2>Step 3: Making It Work with JavaScript</h2>
+
+<p> Time to add some magic, let’s make our slider fully functional. Using JavaScript, we’ll bring everything together and handle the interactive parts by: </p>
+ <ul class="custom-list">
+  <li>Making the "next" and "previous" buttons work</li> 
+  <li>Setting up automatic slide transitions every 20 seconds</li> 
+</ul> 
+<p> Let’s jump in and see how this works! </p>
+
+<h3>1. Setup and Selecting Elements</h3>
+
+<p>
+  First things first, we’ll grab the key elements we need and create a simple variable to keep track of which slide is showing. This sets the foundation for everything that follows.
+</p>
+
+<div class="code-container">
+  <!-- Top Bar -->
+  <div class="code-header">
+    <span class="code-type">JavaScript</span>
+    <button class="copy-btn" onclick="copyCode()">Copy</button>
+  </div>
+
+  <!-- Code Section -->
+  <div class="code-section">
+    <pre><code class="language-javascript" id="js-code-content-1">
+      <div class="line"><span class="line-number">1</span><span class="line-code">let currentSlide = 0;</span></div>
+      <div class="line"><span class="line-number">2</span><span class="line-code">const slides = document.querySelectorAll('.slide');</span></div>
+      <div class="line"><span class="line-number">3</span><span class="line-code">const prevBtn = document.querySelector('.prev');</span></div>
+      <div class="line"><span class="line-number">4</span><span class="line-code">const nextBtn = document.querySelector('.next');</span></div>
+</code></pre>
+  </div>
+</div>
+
+<p>
+  <span class="keyword">let currentSlide = 0;</span>  This variable tracks the current slide. It’s initialized to 0, which means the first image will be shown initially.
+</p>
+<p>
+  <span class="keyword">const slides = document.querySelectorAll('.slide');</span>,<br> <span class="keyword">const prevBtn = document.querySelector('.prev');</span> and <span class="keyword">const nextBtn = document.querySelector('.next');</span>  We need to select all the slides and the navigation buttons for controlling the slider.
+</p>
+
+
+
+<h3>2. Displaying the Active Slide</h3>
+
+<p>
+  Now, let's jump into the functions. We need a way to display the correct slide (image). This function will ensure the right image is shown as we move forward or backward.
+</p>
+
+<div class="code-container">
+  <!-- Top Bar -->
+  <div class="code-header">
+    <span class="code-type">JavaScript</span>
+    <button class="copy-btn" onclick="copyCode()">Copy</button>
+  </div>
+
+  <!-- Code Section -->
+  <div class="code-section">
+    <pre><code class="language-javascript" id="js-code-content-2">
+      <div class="line"><span class="line-number">6</span><span class="line-code">function showSlide(index) {</span></div>
+      <div class="line"><span class="line-number">7</span><span class="line-code">  slides.forEach((slide, i) => {</span></div>
+      <div class="line"><span class="line-number">8</span><span class="line-code">    slide.classList.remove('active');</span></div>
+      <div class="line"><span class="line-number">9</span><span class="line-code">    if (i === index) slide.classList.add('active');</span></div>
+      <div class="line"><span class="line-number">10</span><span class="line-code">  });</span></div>
+      <div class="line"><span class="line-number">11</span><span class="line-code">}</span></div>
+    </code></pre>
+  </div>
+</div>
+
+<p>
+  <span class="keyword">slides.forEach((slide, i) => { ... });</span>  This loops through all the slides, giving us access to each one individually. The <span class="keyword">i</span> represents the index of each slide in the <span class="keyword">slides</span> NodeList.
+</p>
+<p>
+  <span class="keyword">slide.classList.remove('active');</span>  Before displaying a new slide, we remove the <span class="keyword">active</span> class from all slides.
+</p>
+<p>
+  <span class="keyword">if (i === index) slide.classList.add('active');</span> Then we check if the current slide’s index matches the index passed to the <span class="keyword">showSlide</span> function. If it does, we add the <span class="keyword">active</span> class, which makes that slide visible.
+</p>
+
+<h3>3. Navigating Between Slides</h3>
+
+<p>
+  Next, we need to handle the navigation between slides: moving forward and backward when the user clicks the buttons. We'll use two functions.
+</p>
+
+
+<div class="code-container">
+  <!-- Top Bar -->
+  <div class="code-header">
+    <span class="code-type">JavaScript</span>
+    <button class="copy-btn" onclick="copyCode()">Copy</button>
+  </div>
+
+  <!-- Code Section -->
+  <div class="code-section">
+    <pre><code class="language-javascript" id="js-code-content-3">
+      <div class="line"><span class="line-number">13</span><span class="line-code">function nextSlide() {</span></div>
+      <div class="line"><span class="line-number">14</span><span class="line-code">  currentSlide = (currentSlide + 1) % slides.length;</span></div>
+      <div class="line"><span class="line-number">15</span><span class="line-code">  showSlide(currentSlide);</span></div>
+      <div class="line"><span class="line-number">16</span><span class="line-code">}</span></div>
+      <div class="line"><span class="line-number">17</span><span class="line-code"></span></div>
+      <div class="line"><span class="line-number">18</span><span class="line-code">function prevSlide() {</span></div>
+      <div class="line"><span class="line-number">19</span><span class="line-code">  currentSlide = (currentSlide - 1 + slides.length) % slides.length;</span></div>
+      <div class="line"><span class="line-number">20</span><span class="line-code">  showSlide(currentSlide);</span></div>
+      <div class="line"><span class="line-number">21</span><span class="line-code">}</span></div>
+    </code></pre>
+  </div>
+</div>
+
+<p>
+  <span class="keyword">nextSlide()</span>  This function advances to the next slide by increasing <span class="keyword">currentSlide</span> by 1. The expression <span class="keyword">(currentSlide + 1) % slides.length</span> ensures that when we reach the last slide, it loops back to the first one, creating a continuous loop.
+</p>
+
+<p>
+  <span class="keyword">prevSlide()</span>  This function moves to the previous slide by decreasing <span class="keyword">currentSlide</span> by 1. The formula <span class="keyword">(currentSlide - 1 + slides.length) % slides.length</span> ensures that when we're on the first slide, clicking "previous" takes us to the last slide, keeping the transition circular.
+</p>
+
+<p>
+  Both functions call <span class="keyword">showSlide(currentSlide)</span> to update the active slide after the index change.
+</p>
+
+
+
+<h3>4. Making the Buttons Interactive & Auto-Transitioning Slides</h3>
+
+<p>Let's finish the JS code by making the buttons interactive using <span class="keyword">addEventListener</span>.</p>
+
+
+<div class="code-container">
+  <!-- Top Bar -->
+  <div class="code-header">
+    <span class="code-type">JavaScript</span>
+    <button class="copy-btn" onclick="copyCode()">Copy</button>
+  </div>
+
+  <!-- Code Section -->
+  <div class="code-section">
+    <pre><code class="language-javascript" id="js-code-content-4">
+      <div class="line"><span class="line-number">23</span><span class="line-code">nextBtn.addEventListener('click', nextSlide);</span></div>
+      <div class="line"><span class="line-number">24</span><span class="line-code">prevBtn.addEventListener('click', prevSlide);</span></div>
+      <div class="line"><span class="line-number">25</span><span class="line-code"></span></div>
+      <div class="line"><span class="line-number">26</span><span class="line-code">setInterval(nextSlide, 20000);</span></div>
+    </code></pre>
+  </div>
+</div>
+
+<p> <span class="keyword">nextBtn.addEventListener('click', nextSlide);</span>, <span class="keyword">prevBtn.addEventListener('click', prevSlide);</span>  These add click event listeners to the "next" and "previous" buttons. Clicking them triggers the <span class="keyword">nextSlide()</span> and <span class="keyword">prevSlide()</span> functions, letting users navigate through the slides manually. </p>
+<p><span class="keyword">setInterval(nextSlide, 20000);</span>  This sets up an automatic transition between slides every 20 seconds (20000 milliseconds), creating an auto-sliding effect.</p>
+
+
+
+<h3>Bringing It All Together</h3>
+
+<p>
+  This image slider code seamlessly combines HTML, CSS, and JavaScript to create an interactive experience. With intuitive controls for manual navigation and automatic slide transitions, it offers a flexible foundation for adding dynamic, engaging visual content to any website.
+</p>
+
+<hr>
+
+<h3>Bonus Touch: Smooth It Out</h3>
+
+<p>
+  Elevate your slider with a smooth fade-in effect, adding a sleek transition between slides for a more polished experience.
+</p>
+
+
+<div class="code-container">
+  <!-- Top Bar -->
+  <div class="code-header">
+    <span class="code-type">CSS</span>
+    <button class="copy-btn" onclick="copyCode()">Copy</button>
+  </div>
+  
+  <!-- Code Section -->
+  <div class="code-section">
+    <pre><code class="language-css" id="css-code-content">
+      <div class="line"><span class="line-number">13</span><span class="line-code">.slider {</span></div>
+      <div class="line"><span class="line-number">14</span><span class="line-code">  display: flex;</span></div>
+      <div class="line"><span class="line-number">15</span><span class="line-code">  position: relative;</span></div>
+      <div class="line"><span class="line-number">16</span><span class="line-code">}</span></div>
+      <div class="line"><span class="line-number">17</span><span class="line-code">.slide {</span></div>
+      <div class="line"><span class="line-number">18</span><span class="line-code">  min-width: 100%;</span></div>
+      <div class="line"><span class="line-number">19</span><span class="line-code">  opacity: 0;</span></div>
+      <div class="line"><span class="line-number">20</span><span class="line-code">  position: absolute;</span></div>
+      <div class="line"><span class="line-number">21</span><span class="line-code">  transition: opacity 1s ease-in-out;</span></div>
+      <div class="line"><span class="line-number">22</span><span class="line-code">}</span></div>
+      <div class="line"><span class="line-number">23</span><span class="line-code">.slide.active {</span></div>
+      <div class="line"><span class="line-number">24</span><span class="line-code">  opacity: 1;</span></div>
+      <div class="line"><span class="line-number">25</span><span class="line-code">  position: relative;</span></div>
+      <div class="line"><span class="line-number">26</span><span class="line-code">  z-index: 1;</span></div>
+      <div class="line"><span class="line-number">27</span><span class="line-code">}</span></div>
+    </code></pre>    
+  </div>
+</div>
+
+<p>This CSS makes a slider with smooth fade animations. When a slide becomes <span class="keyword">.active</span>, it fades in over 1 second thanks to the <span class="keyword">transition</span>. Switching slides creates a seamless, elegant transition that enhances the overall user experience.</p>
+
+<hr>
+
+
+<p> Now it’s your turn to experiment! Swap out images, adjust the animation, or add your own creative touches this is your space to play and customize the demo. </p>
+
+</div>
+
+
+
+<!-- CODE EDITOR SECTION 2 -->
+<section class="editor2">
+  <!-- Editor Tabs and Area -->
+  <div class="editor-pane2">
+    <div class="editor-tabs2">
+      <button data-lang="html" class="tab-btn active">HTML</button>
+      <button data-lang="css" class="tab-btn">CSS</button>
+      <button data-lang="js" class="tab-btn">JavaScript</button>
+    </div>
+    <div class="code2">
+      <textarea id="code2" name="code2"></textarea>
+    </div>
+  </div>
+
+  <!-- Live Preview -->
+  <div class="preview-pane2">
+    <div class="editor-tabs2">
+      <button class="toggle2" id="toggle2">Expand View</button>
+      <button class="run2" id="run2">Run</button>
+    </div>
+    <div class="preview2">
+      <iframe id="preview2"></iframe>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="art-p">
+
+<p>
+  Thanks for following along! Hope you had fun and picked up something useful along the way. Catch you in the next tutorial!
+</p>
+
+
+
+
+
+
+          
+      </div>
+
+      </main>
+
+
+      <footer>
+        <div class="footer-container">
+          <p>&copy; 2025 BRAHMI. All rights reserved.</p>
+          <p class="back-to-top">Back to top</p>
+        </div>
+      </footer>
+
+      <script src="app.js"></script>
+</body>
+</html>
